@@ -32,6 +32,11 @@ HTTPstatus <- function(status){
     warning <- 'Pl@ntNet returned: Species Not Found'
     rtn <- 'Species Not Found'
 
+  } else if(status == 414){
+
+    warning <- 'Pl@ntNet returned: URI Too Long'
+    rtn <- 'URI Too Long'
+
   } else if(status == 429){
 
     warning <- 'Pl@ntNet returned: Too Many Requests'
