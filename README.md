@@ -1,15 +1,13 @@
 ---
 title: "Introduction to plantnet R-package"
 author: "Tom August"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "18 July, 2019"
 output: 
   html_document: 
     keep_md: yes
 ---
 
-```{r, echo=FALSE, message=FALSE}
-load('key.rdata')
-```
+
 
 ## PlantNet
 
@@ -19,12 +17,25 @@ The R-package interfaces with the PlantNet image classification API. This API is
 
 To install the development version of this package from Github use this code.
 
-```{r install, eval = FALSE}
+
+```r
 # Install using the devtools package
 devtools::install_github(repo = 'BiologicalRecordsCentre/plantnet')
 ```
-```{r library}
+
+```r
 library(plantnet)
+```
+
+```
+## 
+## Attaching package: 'plantnet'
+```
+
+```
+## The following object is masked from 'package:graphics':
+## 
+##     identify
 ```
 
 ## Using the package to classify images
@@ -35,15 +46,35 @@ With these we can do a single image classification like this. Here we use this p
 
 <center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Single_lavendar_flower02.jpg/800px-Single_lavendar_flower02.jpg"></center>
 
-```{r key, eval=FALSE}
+
+```r
 # Get your key from https://my.plantnet.org/
 key <- "YOUR_SUPER_SECRET_KEY"
 ```
-```{r one_image1}
+
+```r
 # Get the URL for your image
 imageURL <- 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Single_lavendar_flower02.jpg/800px-Single_lavendar_flower02.jpg'
 ```
-```{r one_image2}
+
+```r
 classifications <- identify(key, imageURL)
 classifications
+```
+
+```
+##       score     latin_name                 common_name         
+##  [1,] 35.92154  "Lavandula dentata"        "French lavender"   
+##  [2,] 31.78688  "Lavandula angustifolia"   "Lavender"          
+##  [3,] 18.06659  "Lavandula stoechas"       "Topped lavender"   
+##  [4,] 6.717049  "Lavandula latifolia"      "Broadleaf lavender"
+##  [5,] 1.665378  "Perovskia atriplicifolia" "Russian-sage"      
+##  [6,] 1.022022  "Lavandula pinnata"        NA                  
+##  [7,] 0.5533172 "Vitex agnus-castus"       "Chasteberry"       
+##  [8,] 0.5320209 "Salvia farinacea"         "Mealy sage"        
+##  [9,] 0.485067  "Lavandula multifida"      "Fern-leaf lavender"
+## [10,] 0.3812005 "Lavandula canariensis"    NA                  
+## [11,] 0.2864826 "Nepeta tuberosa"          NA                  
+## [12,] 0.1719182 "Lavandula minutolii"      NA                  
+## [13,] 0.1427725 "Perovskia abrotanoides"   "Russian Sage"
 ```
