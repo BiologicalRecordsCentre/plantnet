@@ -17,6 +17,7 @@
 #' then a data.frame is with three columns for the score, latin name,
 #' and common name. There are as many rows as there are species predictions
 #' from the API.
+#' @import httr
 #' @export
 
 identify <- function(key, imageURL, simplify = TRUE){
@@ -43,7 +44,7 @@ identify <- function(key, imageURL, simplify = TRUE){
   }
 
   # the status is 200 so let's parse the content of the response
-  prediction <- content(response, as = 'parsed')
+  prediction <- httr::content(response, as = 'parsed')
 
   # Simplify to a table if needed
   if(simplify){

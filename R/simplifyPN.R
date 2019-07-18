@@ -14,7 +14,11 @@ simplifyPN <- function(sp){
 
   score = sp$score
   latin_name = sp$species$scientificNameWithoutAuthor
-  common_name = sp$species$commonNames[[1]]
+  if(length(sp$species$commonNames) == 0){
+    common_name = NA
+  } else {
+    common_name = sp$species$commonNames[[1]]
+  }
 
   return(list(score = score,
               latin_name = latin_name,

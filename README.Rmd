@@ -1,0 +1,47 @@
+---
+title: "Introduction to plantnet R-package"
+author: "Tom August"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r, echo=FALSE, message=FALSE}
+load('key.rdata')
+```
+
+## PlantNet
+
+The R-package interfaces with the PlantNet image classification API. This API is designed to recieve images and return species classifications. You can find out more about the PlantNet project here: https://plantnet.org. To use the API you need to have registered an account and generated an API key. All this can be done here: https://my.plantnet.org/.
+
+## Install the package
+
+To install the development version of this package from Github use this code.
+
+```{r install, eval = FALSE}
+# Install using the devtools package
+devtools::install_github(repo = 'BiologicalRecordsCentre/plantnet')
+```
+```{r library}
+library(plantnet)
+```
+
+## Using the package to classify images
+
+The images that you want to classify need to have URLs. If the images you have are not online you will need to put them online and then copy all of the URLs. The other information you need is your API key. You can create this after registering here:  https://my.plantnet.org/.
+
+With these we can do a single image classification like this. Here we use this photo of a lavendar
+
+<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Single_lavendar_flower02.jpg/800px-Single_lavendar_flower02.jpg"></center>
+
+```{r key, eval=FALSE}
+# Get your key from https://my.plantnet.org/
+key <- "YOUR_SUPER_SECRET_KEY"
+```
+```{r one_image1}
+# Get the URL for your image
+imageURL <- 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Single_lavendar_flower02.jpg/800px-Single_lavendar_flower02.jpg'
+```
+```{r one_image2}
+classifications <- identify(key, imageURL)
+classifications
+```
