@@ -1,0 +1,5 @@
+title: plantnet R-package
+url: https://biologicalrecordscentre.github.io/plantnet/
+template:
+  params:
+    bootswatch: simplex
