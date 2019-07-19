@@ -2,7 +2,7 @@
 % Please edit documentation in R/identify.R
 \name{identify}
 \alias{identify}
-\title{HTTP status handler}
+\title{Identify plants}
 \usage{
 identify(key, imageURL, simplify = TRUE, organs = rep("leaf",
   length(imageURL)), lang = "en")
@@ -34,9 +34,7 @@ and common name. There are as many rows as there are species predictions
 from the API.
 }
 \description{
-This function interprets the meaning of the HTTP status and returns
-the elements needed to create an appropriate warning and return
-something meaningful to the user.
+This function is used to classify images using the PlantNet API.
 }
 \details{
 The function uses the PlantNet API. To use this service you need
