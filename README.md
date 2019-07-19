@@ -1,12 +1,3 @@
----
-output: 
-  html_document: 
-    keep_md: yes
----
-
-
-
-
 # PlantNet
 
 ### Developed by Tom August
