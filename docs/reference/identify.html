@@ -109,7 +109,8 @@ something meaningful to the user.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>identify</span>(<span class='no'>key</span>, <span class='no'>imageURL</span>, <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>identify</span>(<span class='no'>key</span>, <span class='no'>imageURL</span>, <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>organs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"leaf"</span>,
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>imageURL</span>)), <span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"en"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -120,12 +121,26 @@ something meaningful to the user.</p>
     </tr>
     <tr>
       <th>imageURL</th>
-      <td><p>character, the URL path top the image you want to identify</p></td>
+      <td><p>character, the URL path top the image you want to identify.
+You can provide up to 5 images as a vector of URLs. These images must be
+of the SAME plant.</p></td>
     </tr>
     <tr>
       <th>simplify</th>
       <td><p>logical, if `TRUE` the output will be simplified into a
 data.frame</p></td>
+    </tr>
+    <tr>
+      <th>organs</th>
+      <td><p>character, the organ in the image. Must be one of,
+leaf, flower, fruit, or bark. Must be the same length as `imageURL`.
+You can also use the tags habit (the overall form of the plant), or other,
+but you can only have an image labelled as one of these if you also have
+an image labelled as one of the primay organs (i.e. leaf, flower, fruit, bark).</p></td>
+    </tr>
+    <tr>
+      <th>lang</th>
+      <td><p>can be one of 'en' (English), 'fr' (French), 'de' (German)</p></td>
     </tr>
     </table>
     
@@ -145,6 +160,36 @@ to have registered an account and generated an API key. All this can be
 done here: https://my.plantnet.org/.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Get your key from https://my.plantnet.org/</span>
+<span class='no'>key</span> <span class='kw'>&lt;-</span> <span class='st'>"YOUR_SUPER_SECRET_KEY"</span>
+<span class='no'>imageURL</span> <span class='kw'>&lt;-</span> <span class='st'>'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Single_lavendar_flower02.jpg/800px-Single_lavendar_flower02.jpg'</span>
+
+<span class='co'># A simple search with one image</span>
+<span class='no'>classifications</span> <span class='kw'>&lt;-</span> <span class='fu'>identify</span>(<span class='no'>key</span>, <span class='no'>imageURL</span>)
+<span class='no'>classifications</span>
+
+<span class='co'># Turning simplify to FALSE you can get more infomation</span>
+<span class='no'>classifications</span> <span class='kw'>&lt;-</span> <span class='fu'>identify</span>(<span class='no'>key</span>, <span class='no'>imageURL</span>, <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='no'>classifications</span>,<span class='fl'>1</span>)
+<span class='no'>classifications</span>$<span class='no'>results</span><span class='kw'>[[</span><span class='fl'>1</span>]]
+
+<span class='co'># We can search using up to five images</span>
+<span class='co'># Here are three picture of Quercus robur</span>
+<span class='no'>imageURL1</span> <span class='kw'>&lt;-</span> <span class='st'>'https://content.eol.org/data/media/55/2c/a8/509.1003460.jpg'</span>
+<span class='no'>imageURL2</span> <span class='kw'>&lt;-</span> <span class='st'>'https://content.eol.org/data/media/89/88/4c/549.BI-image-16054.jpg'</span>
+<span class='no'>imageURL3</span> <span class='kw'>&lt;-</span> <span class='st'>'https://content.eol.org/data/media/8a/77/9b/549.BI-image-76488.jpg'</span>
+
+<span class='no'>classifications</span> <span class='kw'>&lt;-</span> <span class='fu'>identify</span>(<span class='no'>key</span>, <span class='kw'>imageURL</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>imageURL1</span>, <span class='no'>imageURL2</span>, <span class='no'>imageURL3</span>))
+<span class='no'>classifications</span>
+
+<span class='co'># The classification is better if we assign an organ to each image</span>
+<span class='no'>classifications</span> <span class='kw'>&lt;-</span> <span class='fu'>identify</span>(<span class='no'>key</span>,
+                            <span class='kw'>imageURL</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>imageURL1</span>, <span class='no'>imageURL2</span>, <span class='no'>imageURL3</span>),
+                            <span class='kw'>organs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'habit'</span>,<span class='st'>'bark'</span>,<span class='st'>'fruit'</span>))
+<span class='no'>classifications</span>
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -154,7 +199,9 @@ done here: https://my.plantnet.org/.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

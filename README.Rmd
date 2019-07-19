@@ -1,19 +1,21 @@
 ---
-title: "Introduction to plantnet R-package"
-author: "Tom August"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document: 
     keep_md: yes
 ---
 
+
 ```{r, echo=FALSE, message=FALSE}
 load('key.rdata')
+knitr::opts_chunk$set(cache = TRUE)
 ```
 
-## PlantNet
+# PlantNet
 
-The R-package interfaces with the PlantNet image classification API. This API is designed to recieve images and return species classifications. You can find out more about the PlantNet project here: https://plantnet.org. To use the API you need to have registered an account and generated an API key. All this can be done here: https://my.plantnet.org/.
+### Developed by Tom August
+last built `r Sys.Date()`
+
+The R-package interfaces with the PlantNet image classification API. This API is designed to receive images and return species classifications. You can find out more about the PlantNet project here: https://plantnet.org. To use the API you need to have registered an account and generated an API key. All this can be done here: https://my.plantnet.org/.
 
 ## Install the package
 
@@ -23,7 +25,7 @@ To install the development version of this package from Github use this code.
 # Install using the devtools package
 devtools::install_github(repo = 'BiologicalRecordsCentre/plantnet')
 ```
-```{r library}
+```{r library, message=FALSE}
 library(plantnet)
 ```
 
@@ -31,10 +33,12 @@ library(plantnet)
 
 The images that you want to classify need to have URLs. If the images you have are not online you will need to put them online and then copy all of the URLs. The other information you need is your API key. You can create this after registering here:  https://my.plantnet.org/.
 
-With these we can do a single image classification like this. Here we use this photo of a lavendar
+### Single image
 
-<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Single_lavendar_flower02.jpg/800px-Single_lavendar_flower02.jpg"></center>
-
+With these we can do a single image classification like this. Here we use this photo of a lavender
+ 
+<center><img style="max-width: 450px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Single_lavendar_flower02.jpg/800px-Single_lavendar_flower02.jpg"></center>
+<br> 
 ```{r key, eval=FALSE}
 # Get your key from https://my.plantnet.org/
 key <- "YOUR_SUPER_SECRET_KEY"
@@ -47,3 +51,55 @@ imageURL <- 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Single_la
 classifications <- identify(key, imageURL)
 classifications
 ```
+
+You can see in the the table returned there are three columns returned. The first gives you a score, this is the likelihood that the species in this row is the correct classification for the image you provided. As you can see in this instance there is not much between the top two species so we could not be confident which species it is. The second column gives the Latin names as binomials, and the final column gives the most commonly used common name for the species.
+
+If you want more information, such as a list of all of the common names for each classification, or the full Latin name including authors, you can access all of this information by using `simplify = FALSE`.
+
+```{r simpOff}
+classifications <- identify(key, imageURL, simplify = FALSE)
+str(classifications,1)
+```
+
+The top elements give some information about the call we made to the API, but the results contains what we are usually after. Results has one entry for each species classification, or each row in the table we saw above. Let's look at one.
+
+```{r results}
+classifications$results[[1]]
+```
+
+Here we have information on the Latin name, authors, and at the end, a list of the common names.
+
+### Multiple images
+
+You can get a better identification if you provide more than one image of the plant, and of multiple organs of the plant. The organs that PlantNet considers are: leaf, flower, fruit, bark. You can also take images classed as habit (the overall form of the plant), or other, but you can only have an image labelled as one of these if you also have an image labelled as one of the primary organs (i.e. leaf, flower, fruit, bark).
+
+In this example we are going to use three images of Quercus robur from the Encyclopedia of Life.
+
+<center><img style="max-width: 450px" src="https://content.eol.org/data/media/55/2c/a8/509.1003460.jpg"></center>
+<br> 
+<center><img style="max-width: 450px" src="https://content.eol.org/data/media/89/88/4c/549.BI-image-16054.jpg"></center>
+<br> 
+<center><img style="max-width: 450px" src="https://content.eol.org/data/media/8a/77/9b/549.BI-image-76488.jpg"></center>
+<br> 
+```{r multi1}
+# We can search using up to five images
+# Here are three picture of Quercus robur
+imageURL1 <- 'https://content.eol.org/data/media/55/2c/a8/509.1003460.jpg'
+imageURL2 <- 'https://content.eol.org/data/media/89/88/4c/549.BI-image-16054.jpg'
+imageURL3 <- 'https://content.eol.org/data/media/8a/77/9b/549.BI-image-76488.jpg'
+
+classifications <- identify(key, imageURL = c(imageURL1, imageURL2, imageURL3))
+
+classifications
+```
+In this case all three images have been used to arrive at one classification. Here we get quite a few species suggested but the top species is correct, and has a significantly higher score than the second species. In this example we have not told the API what the organs are. The API can use this information to help give a better classification.
+
+```{r multi2}
+# This time I specify the organs in each image
+classifications <- identify(key,
+                            imageURL = c(imageURL1, imageURL2, imageURL3),
+                            organs = c('habit','bark','fruit'))
+classifications
+```
+
+Notice that now the API knows which organs each image is of, we get a much more accurate result.
