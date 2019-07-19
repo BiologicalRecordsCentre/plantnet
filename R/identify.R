@@ -1,8 +1,6 @@
-#' HTTP status handler
+#' Identify plants
 #'
-#' This function interprets the meaning of the HTTP status and returns
-#' the elements needed to create an appropriate warning and return
-#' something meaningful to the user.
+#' This function is used to classify images using the PlantNet API.
 #'
 #' @param key character, your API key (get from https://my.plantnet.org/)
 #' @param imageURL character, the URL path top the image you want to identify.
