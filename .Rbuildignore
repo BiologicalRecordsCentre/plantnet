@@ -1,3 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 key.rdata
+README_cache/
+docs/
+README.Rmd
+README.html
+README_cache
+_pkgdown.yaml

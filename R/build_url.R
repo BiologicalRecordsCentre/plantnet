@@ -12,6 +12,7 @@
 #' an image labelled as one of the primay organs (i.e. leaf, flower, fruit, bark).
 #' @param lang can be one of 'en' (English), 'fr' (French), 'de' (German)
 #' @return The URL required, as a character of length 1
+#' @importFrom utils URLencode
 #' @export
 
 build_url <- function(key, imageURL, organs = 'leaf', lang = 'en'){
