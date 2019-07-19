@@ -88,18 +88,15 @@ imageURL1 <- 'https://content.eol.org/data/media/55/2c/a8/509.1003460.jpg'
 imageURL2 <- 'https://content.eol.org/data/media/89/88/4c/549.BI-image-16054.jpg'
 imageURL3 <- 'https://content.eol.org/data/media/8a/77/9b/549.BI-image-76488.jpg'
 
-classifications <- identify(key, imageURL = c(imageURL1, imageURL2, imageURL3))
-
-classifications
+identify(key, imageURL = c(imageURL1, imageURL2, imageURL3))
 ```
-In this case all three images have been used to arrive at one classification. Here we get quite a few species suggested but the top species is correct, and has a significantly higher score than the second species. In this example we have not told the API what the organs are. The API can use this information to help give a better classification.
+In this case all three images have been used to arrive at one classification. Here we get a few species suggested but the top species is correct, and has a significantly higher score than the second species. In this example we have not told the API what the organs are. The API can use this information to help give a better classification.
 
 ```{r multi2}
 # This time I specify the organs in each image
-classifications <- identify(key,
-                            imageURL = c(imageURL1, imageURL2, imageURL3),
-                            organs = c('habit','bark','fruit'))
-classifications
+identify(key,
+         imageURL = c(imageURL1, imageURL2, imageURL3),
+         organs = c('habit','bark','fruit'))
 ```
 
-Notice that now the API knows which organs each image is of, we get a much more accurate result.
+Notice that now the API knows which organs each image is of, we get slightly different results, the top species is the same but we can have higher confidence that this is the correct answer because the distance between the score of the first and second image is larger than before.

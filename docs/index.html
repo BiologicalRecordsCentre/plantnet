@@ -176,24 +176,21 @@ imageURL1 &lt;-<span class="st"> 'https://content.eol.org/data/media/55/2c/a8/50
 imageURL2 &lt;-<span class="st"> 'https://content.eol.org/data/media/89/88/4c/549.BI-image-16054.jpg'</span>
 imageURL3 &lt;-<span class="st"> 'https://content.eol.org/data/media/8a/77/9b/549.BI-image-76488.jpg'</span>
 
-classifications &lt;-<span class="st"> </span><span class="kw"><a href="reference/identify.html">identify</a></span>(key, <span class="dt">imageURL =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(imageURL1, imageURL2, imageURL3))
-
-classifications</code></pre></div>
+<span class="kw"><a href="reference/identify.html">identify</a></span>(key, <span class="dt">imageURL =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(imageURL1, imageURL2, imageURL3))</code></pre></div>
 <pre><code>##      score    latin_name           common_name      
 ## [1,] 68.28053 "Quercus robur"      "Pedunculate oak"
 ## [2,] 28.3852  "Terminalia catappa" "Indian-almond"  
 ## [3,] 19.02534 "Quercus petraea"    "Sessile oak"</code></pre>
-<p>In this case all three images have been used to arrive at one classification. Here we get quite a few species suggested but the top species is correct, and has a significantly higher score than the second species. In this example we have not told the API what the organs are. The API can use this information to help give a better classification.</p>
+<p>In this case all three images have been used to arrive at one classification. Here we get a few species suggested but the top species is correct, and has a significantly higher score than the second species. In this example we have not told the API what the organs are. The API can use this information to help give a better classification.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This time I specify the organs in each image</span>
-classifications &lt;-<span class="st"> </span><span class="kw"><a href="reference/identify.html">identify</a></span>(key,
-                            <span class="dt">imageURL =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(imageURL1, imageURL2, imageURL3),
-                            <span class="dt">organs =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'habit'</span>,<span class="st">'bark'</span>,<span class="st">'fruit'</span>))
-classifications</code></pre></div>
+<span class="kw"><a href="reference/identify.html">identify</a></span>(key,
+         <span class="dt">imageURL =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(imageURL1, imageURL2, imageURL3),
+         <span class="dt">organs =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'habit'</span>,<span class="st">'bark'</span>,<span class="st">'fruit'</span>))</code></pre></div>
 <pre><code>##      score    latin_name           common_name      
 ## [1,] 68.28053 "Quercus robur"      "Pedunculate oak"
 ## [2,] 19.02534 "Quercus petraea"    "Sessile oak"    
 ## [3,] 18.92347 "Terminalia catappa" "Indian-almond"</code></pre>
-<p>Notice that now the API knows which organs each image is of, we get a much more accurate result.</p>
+<p>Notice that now the API knows which organs each image is of, we get slightly different results, the top species is the same but we can have higher confidence that this is the correct answer because the distance between the score of the first and second image is larger than before.</p>
 </div>
 </div>
 </div>
