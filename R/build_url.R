@@ -28,6 +28,10 @@ build_url <- function(key, imageURL, organs = 'leaf', lang = 'en'){
     stop("At leaset one image must be tagged as 'flower','leaf','fruit','bark'")
   }
 
+  if(!lang %in% c('en', 'fr', 'de')){
+    stop("lang must be one of 'en', 'fr', 'de'")
+  }
+
   URLencoded <- sapply(imageURL, FUN = URLencode, reserved = TRUE, repeated = TRUE)
 
   paste0("https://my-api.plantnet.org/v1/identify/all?",
