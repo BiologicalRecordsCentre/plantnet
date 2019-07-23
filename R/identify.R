@@ -5,7 +5,10 @@
 #' @param key character, your API key (get from https://my.plantnet.org/)
 #' @param imageURL character, the URL path top the image you want to identify.
 #' You can provide up to 5 images as a vector of URLs. These images must be
-#' of the SAME plant.
+#' of the SAME plant. Make sure this URL is correct, if it is wrong and does
+#' note link to your image, or if the link cannot be accessed from the API
+#' because, for example, a login is needed, you will get a 'Species not found'
+#' error.
 #' @param simplify logical, if `TRUE` the output will be simplified into a
 #' data.frame
 #' @param organs character, the organ in the image. Must be one of,
@@ -62,7 +65,7 @@ identify <- function(key, imageURL, simplify = TRUE,
   if(!is.character(key)) stop('key should be a character')
   if(!is.character(imageURL)) stop('image should be a character')
 
-  URL <- build_url(key = key, imageURL = imageURL, organs = organs, lang = lang)
+  URL <- buildURL(key = key, imageURL = imageURL, organs = organs, lang = lang)
 
   # Hit the API
   response <- httr::GET(URL)

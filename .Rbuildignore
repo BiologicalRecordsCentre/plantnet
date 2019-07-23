@@ -7,3 +7,7 @@ README.Rmd
 README.html
 README_cache
 _pkgdown.yaml
+^\.travis\.yml$
+^codecov\.yml$
+^appveyor\.yml$
+tests/testtat/key.rdata

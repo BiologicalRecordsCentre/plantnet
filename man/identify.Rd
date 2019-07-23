@@ -12,7 +12,10 @@ identify(key, imageURL, simplify = TRUE, organs = rep("leaf",
 
 \item{imageURL}{character, the URL path top the image you want to identify.
 You can provide up to 5 images as a vector of URLs. These images must be
-of the SAME plant.}
+of the SAME plant. Make sure this URL is correct, if it is wrong and does
+note link to your image, or if the link cannot be accessed from the API
+because, for example, a login is needed, you will get a 'Species not found'
+error.}
 
 \item{simplify}{logical, if `TRUE` the output will be simplified into a
 data.frame}

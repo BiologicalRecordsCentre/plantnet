@@ -10,6 +10,12 @@ load('key.rdata')
 knitr::opts_chunk$set(cache = TRUE)
 ```
 
+  <!-- badges: start -->
+  [![Travis build status](https://travis-ci.org/BiologicalRecordsCentre/plantnet.svg?branch=master)](https://travis-ci.org/BiologicalRecordsCentre/plantnet)
+  [![Codecov test coverage](https://codecov.io/gh/BiologicalRecordsCentre/plantnet/branch/master/graph/badge.svg)](https://codecov.io/gh/BiologicalRecordsCentre/plantnet?branch=master)
+  [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/BiologicalRecordsCentre/plantnet?branch=master&svg=true)](https://ci.appveyor.com/project/BiologicalRecordsCentre/plantnet)
+  <!-- badges: end -->
+
 # PlantNet
 
 ### Developed by Tom August

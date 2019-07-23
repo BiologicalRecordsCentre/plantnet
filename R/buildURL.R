@@ -15,7 +15,7 @@
 #' @importFrom utils URLencode
 #' @export
 
-build_url <- function(key, imageURL, organs = 'leaf', lang = 'en'){
+buildURL <- function(key, imageURL, organs = 'leaf', lang = 'en'){
 
   if(length(imageURL) != length(organs)){
     stop('imageURL and organs must be the same length')
@@ -27,6 +27,10 @@ build_url <- function(key, imageURL, organs = 'leaf', lang = 'en'){
 
   if(!any(organs %in% c('flower','leaf','fruit','bark'))){
     stop("At leaset one image must be tagged as 'flower','leaf','fruit','bark'")
+  }
+
+  if(length(lang) > 1){
+    stop("lang must have length 1. You cannot use more than one language at the same time")
   }
 
   if(!lang %in% c('en', 'fr', 'de')){
