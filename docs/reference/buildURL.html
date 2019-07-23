@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • plantnet R-package</title>
+<title>API URL builder — buildURL • plantnet R-package</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,11 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="API URL builder — buildURL" />
+
+<meta property="og:description" content="This function builds a URL for the PlantNet API using the various
+elements required." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +51,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -89,60 +93,61 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>API URL builder</h1>
+    
+    <div class="hidden name"><code>buildURL.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>This function builds a URL for the PlantNet API using the various
+elements required.</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="buildURL.html">buildURL()</a></code> </p>
-        </td>
-        <td><p>API URL builder</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="HTTPstatus.html">HTTPstatus()</a></code> </p>
-        </td>
-        <td><p>HTTP status handler</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="identify.html">identify()</a></code> </p>
-        </td>
-        <td><p>Identify plants</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="simplifyPN.html">simplifyPN()</a></code> </p>
-        </td>
-        <td><p>Simplify PlantNet response</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>buildURL</span>(<span class='no'>key</span>, <span class='no'>imageURL</span>, <span class='kw'>organs</span> <span class='kw'>=</span> <span class='st'>"leaf"</span>, <span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"en"</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>key</th>
+      <td><p>character, your API key (get from my-api.plantnet.org)</p></td>
+    </tr>
+    <tr>
+      <th>imageURL</th>
+      <td><p>character, the URL path top the image you want to identify</p></td>
+    </tr>
+    <tr>
+      <th>organs</th>
+      <td><p>character, the organ in the image. Must be one of,
+leaf, flower, fruit, or bark. Currently this does not effect the result.
+You can also use the tags habit (the overall form of the plant), or other,
+but you can only have an image labelled as one of these if you also have
+an image labelled as one of the primay organs (i.e. leaf, flower, fruit, bark).</p></td>
+    </tr>
+    <tr>
+      <th>lang</th>
+      <td><p>can be one of 'en' (English), 'fr' (French), 'de' (German)</p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>The URL required, as a character of length 1</p>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
+
   </div>
 </div>
 
