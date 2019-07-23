@@ -1,7 +1,22 @@
+---
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+
+
+
+  <!-- badges: start -->
+  [![Travis build status](https://travis-ci.org/BiologicalRecordsCentre/plantnet.svg?branch=master)](https://travis-ci.org/BiologicalRecordsCentre/plantnet)
+  [![Codecov test coverage](https://codecov.io/gh/BiologicalRecordsCentre/plantnet/branch/master/graph/badge.svg)](https://codecov.io/gh/BiologicalRecordsCentre/plantnet?branch=master)
+  [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/BiologicalRecordsCentre/plantnet?branch=master&svg=true)](https://ci.appveyor.com/project/BiologicalRecordsCentre/plantnet)
+  <!-- badges: end -->
+
 # PlantNet
 
 ### Developed by Tom August
-last built 2019-07-19
+last built 2019-07-23
 
 The R-package interfaces with the PlantNet image classification API. This API is designed to receive images and return species classifications. You can find out more about the PlantNet project here: https://plantnet.org. To use the API you need to have registered an account and generated an API key. All this can be done here: https://my.plantnet.org/.
 
