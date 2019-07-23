@@ -1,12 +1,3 @@
----
-output: 
-  html_document: 
-    keep_md: yes
----
-
-
-
-
   <!-- badges: start -->
   [![Travis build status](https://travis-ci.org/BiologicalRecordsCentre/plantnet.svg?branch=master)](https://travis-ci.org/BiologicalRecordsCentre/plantnet)
   [![Codecov test coverage](https://codecov.io/gh/BiologicalRecordsCentre/plantnet/branch/master/graph/badge.svg)](https://codecov.io/gh/BiologicalRecordsCentre/plantnet?branch=master)
