@@ -97,7 +97,7 @@ test_that("test simplificaton has the expected result", {
 
   expected <- do.call(rbind, simp)
 
-  expect_equal(class(expected), 'matrix')
+  expect_true('matrix' %in% class(expected))
   expect_equal(colnames(expected), c("score", "latin_name", "common_name"))
   expect_equal(nrow(expected), 13)
 
