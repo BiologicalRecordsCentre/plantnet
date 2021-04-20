@@ -6,16 +6,18 @@
 #' @param key character, your API key (get from my-api.plantnet.org)
 #' @param imageURL character, the URL path top the image you want to identify
 #' @param organs character, the organ in the image. Must be one of,
-#' leaf, flower, fruit, or bark. Currently this does not effect the result.
+#' leaf, flower, fruit, or bark. Currently this does not affect the result.
 #' You can also use the tags habit (the overall form of the plant), or other,
 #' but you can only have an image labelled as one of these if you also have
 #' an image labelled as one of the primay organs (i.e. leaf, flower, fruit, bark).
 #' @param lang can be one of 'en' (English), 'fr' (French), 'de' (German)
+#' @param includeRelatedImages boolean. When TRUE, API also returns a list of
+#' images that are most similar to submitted image(s)
 #' @return The URL required, as a character of length 1
 #' @importFrom utils URLencode
 #' @export
 
-buildURL <- function(key, imageURL, organs = 'leaf', lang = 'en'){
+buildURL <- function(key, imageURL, organs = 'leaf', lang = 'en', includeRelatedImages = FALSE){
 
   if(length(imageURL) != length(organs)){
     stop('imageURL and organs must be the same length')
@@ -26,7 +28,7 @@ buildURL <- function(key, imageURL, organs = 'leaf', lang = 'en'){
   }
 
   if(!any(organs %in% c('flower','leaf','fruit','bark'))){
-    stop("At leaset one image must be tagged as 'flower','leaf','fruit','bark'")
+    stop("At least one image must be tagged as 'flower','leaf','fruit','bark'")
   }
 
   if(length(lang) > 1){
@@ -37,12 +39,17 @@ buildURL <- function(key, imageURL, organs = 'leaf', lang = 'en'){
     stop("lang must be one of 'en', 'fr', 'de'")
   }
 
+  if(!includeRelatedImages %in% c(TRUE, FALSE)){
+    stop("includeRelatedImages must be a boolean")
+  }
+
   URLencoded <- sapply(imageURL, FUN = URLencode, reserved = TRUE, repeated = TRUE)
 
-  paste0("https://my-api.plantnet.org/v1/identify/all?",
+  paste0("https://my-api.plantnet.org/v2/identify/all?",
          "images=", paste(URLencoded, collapse = "&images="),
          "&organs=", paste(organs, collapse = "&organs="),
          "&lang=", lang,
+         "&include-related-images=", includeRelatedImages,
          "&api-key=", key)
 
 }
