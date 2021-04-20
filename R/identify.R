@@ -60,12 +60,12 @@
 #'}
 
 identify <- function(key, imageURL, simplify = TRUE,
-                     organs = rep('leaf', length(imageURL)), lang = 'en'){
+                     organs = rep('leaf', length(imageURL)), lang = 'en', includeRelatedImages = FALSE){
 
   if(!is.character(key)) stop('key should be a character')
   if(!is.character(imageURL)) stop('image should be a character')
 
-  URL <- buildURL(key = key, imageURL = imageURL, organs = organs, lang = lang)
+  URL <- buildURL(key = key, imageURL = imageURL, organs = organs, lang = lang, includeRelatedImages = includeRelatedImages)
 
   # Hit the API
   response <- httr::GET(URL)
