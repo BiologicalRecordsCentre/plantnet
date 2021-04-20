@@ -17,6 +17,8 @@
 #' but you can only have an image labelled as one of these if you also have
 #' an image labelled as one of the primay organs (i.e. leaf, flower, fruit, bark).
 #' @param lang can be one of 'en' (English), 'fr' (French), 'de' (German)
+#' @param includeRelatedImages boolean. When TRUE, API also returns a list of
+#' images that are most similar to submitted image(s)
 #' @details The function uses the PlantNet API. To use this service you need
 #' to have registered an account and generated an API key. All this can be
 #' done here: https://my.plantnet.org/.

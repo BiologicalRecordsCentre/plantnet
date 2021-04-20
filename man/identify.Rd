@@ -33,6 +33,9 @@ but you can only have an image labelled as one of these if you also have
 an image labelled as one of the primay organs (i.e. leaf, flower, fruit, bark).}
 
 \item{lang}{can be one of 'en' (English), 'fr' (French), 'de' (German)}
+
+\item{includeRelatedImages}{boolean. When TRUE, API also returns a list of
+images that are most similar to submitted image(s)}
 }
 \value{
 If `simplify` is set to `FALSE` then a list is returned. The
