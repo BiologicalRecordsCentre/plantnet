@@ -4,8 +4,14 @@
 \alias{identify}
 \title{Identify plants}
 \usage{
-identify(key, imageURL, simplify = TRUE, organs = rep("leaf",
-  length(imageURL)), lang = "en")
+identify(
+  key,
+  imageURL,
+  simplify = TRUE,
+  organs = rep("leaf", length(imageURL)),
+  lang = "en",
+  includeRelatedImages = FALSE
+)
 }
 \arguments{
 \item{key}{character, your API key (get from https://my.plantnet.org/)}

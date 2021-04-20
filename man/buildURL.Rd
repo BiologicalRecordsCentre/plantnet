@@ -4,7 +4,13 @@
 \alias{buildURL}
 \title{API URL builder}
 \usage{
-buildURL(key, imageURL, organs = "leaf", lang = "en", includeRelatedImages = FALSE)
+buildURL(
+  key,
+  imageURL,
+  organs = "leaf",
+  lang = "en",
+  includeRelatedImages = FALSE
+)
 }
 \arguments{
 \item{key}{character, your API key (get from my-api.plantnet.org)}
@@ -12,12 +18,15 @@ buildURL(key, imageURL, organs = "leaf", lang = "en", includeRelatedImages = FAL
 \item{imageURL}{character, the URL path top the image you want to identify}
 
 \item{organs}{character, the organ in the image. Must be one of,
-leaf, flower, fruit, or bark. Currently this does not effect the result.
+leaf, flower, fruit, or bark. Currently this does not affect the result.
 You can also use the tags habit (the overall form of the plant), or other,
 but you can only have an image labelled as one of these if you also have
 an image labelled as one of the primay organs (i.e. leaf, flower, fruit, bark).}
 
 \item{lang}{can be one of 'en' (English), 'fr' (French), 'de' (German)}
+
+\item{includeRelatedImages}{boolean. When TRUE, API also returns a list of
+images that are most similar to submitted image(s)}
 }
 \value{
 The URL required, as a character of length 1
