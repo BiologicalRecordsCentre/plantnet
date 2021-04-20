@@ -4,7 +4,7 @@
 \alias{buildURL}
 \title{API URL builder}
 \usage{
-buildURL(key, imageURL, organs = "leaf", lang = "en")
+buildURL(key, imageURL, organs = "leaf", lang = "en", includeRelatedImages = FALSE)
 }
 \arguments{
 \item{key}{character, your API key (get from my-api.plantnet.org)}
