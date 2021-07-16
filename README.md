@@ -33,7 +33,7 @@ The images that you want to classify need to have URLs. If the images you have a
 
 With these we can do a single image classification like this. Here we use this photo of a lavender
  
-<center><img style="max-width: 450px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Single_lavendar_flower02.jpg/800px-Single_lavendar_flower02.jpg"></center>
+<center><img style="max-width: 450px" src="https://warehouse1.indicia.org.uk/upload/o_1ebgpgv221el21b8b1v1b10mgi5je.jpg"></center>
 <br> 
 
 ```r
@@ -43,7 +43,7 @@ key <- "YOUR_SUPER_SECRET_KEY"
 
 ```r
 # Get the URL for your image
-imageURL <- 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Single_lavendar_flower02.jpg/800px-Single_lavendar_flower02.jpg'
+imageURL <- 'https://warehouse1.indicia.org.uk/upload/o_1ebgpgv221el21b8b1v1b10mgi5je.jpg'
 ```
 
 ```r
@@ -52,23 +52,13 @@ classifications
 ```
 
 ```
-##       score     latin_name                 common_name         
-##  [1,] 35.92154  "Lavandula dentata"        "French lavender"   
-##  [2,] 31.78688  "Lavandula angustifolia"   "Lavender"          
-##  [3,] 18.06659  "Lavandula stoechas"       "Topped lavender"   
-##  [4,] 6.717049  "Lavandula latifolia"      "Broadleaf lavender"
-##  [5,] 1.665378  "Perovskia atriplicifolia" "Russian-sage"      
-##  [6,] 1.022022  "Lavandula pinnata"        NA                  
-##  [7,] 0.5533172 "Vitex agnus-castus"       "Chasteberry"       
-##  [8,] 0.5320209 "Salvia farinacea"         "Mealy sage"        
-##  [9,] 0.485067  "Lavandula multifida"      "Fern-leaf lavender"
-## [10,] 0.3812005 "Lavandula canariensis"    NA                  
-## [11,] 0.2864826 "Nepeta tuberosa"          NA                  
-## [12,] 0.1719182 "Lavandula minutolii"      NA                  
-## [13,] 0.1427725 "Perovskia abrotanoides"   "Russian Sage"
+##       score  latin_name               common_name         
+##  [1,] 94.981 "Lavandula angustifolia" "Lavender"          
+##  [2,] 2.978  "Lavandula latifolia"    "Broadleaf lavender"
+##  [3,] 0.797  "Lavandula × intermedia" "Dutch lavender"
 ```
 
-You can see in the the table returned there are three columns returned. The first gives you a score, this is the likelihood that the species in this row is the correct classification for the image you provided. As you can see in this instance there is not much between the top two species so we could not be confident which species it is. The second column gives the Latin names as binomials, and the final column gives the most commonly used common name for the species.
+You can see in the the table returned there are three columns returned. The first gives you a score, this is the likelihood that the species in this row is the correct classification for the image you provided. As you can see in this instance there is a clear winner. The second column gives the Latin names as binomials, and the final column gives the most commonly used common name for the species.
 
 If you want more information, such as a list of all of the common names for each classification, or the full Latin name including authors, you can access all of this information by using `simplify = FALSE`.
 
@@ -82,8 +72,8 @@ str(classifications,1)
 ## List of 4
 ##  $ query              :List of 3
 ##  $ language           : chr "en"
-##  $ preferedReferential: chr "florefrance"
-##  $ results            :List of 13
+##  $ preferedReferential: chr "the-plant-list"
+##  $ results            :List of 3
 ```
 
 The top elements give some information about the call we made to the API, but the results contains what we are usually after. Results has one entry for each species classification, or each row in the table we saw above. Let's look at one.
@@ -95,21 +85,24 @@ classifications$results[[1]]
 
 ```
 ## $score
-## [1] 35.92154
+## [1] 94.981
 ## 
 ## $species
 ## $species$scientificNameWithoutAuthor
-## [1] "Lavandula dentata"
+## [1] "Lavandula angustifolia"
 ## 
 ## $species$scientificNameAuthorship
-## [1] "L."
+## [1] "Mill."
 ## 
 ## $species$genus
 ## $species$genus$scientificNameWithoutAuthor
 ## [1] "Lavandula"
 ## 
 ## $species$genus$scientificNameAuthorship
-## [1] "L."
+## [1] ""
+## 
+## $species$genus$scientificName
+## [1] "Lavandula"
 ## 
 ## 
 ## $species$family
@@ -119,20 +112,35 @@ classifications$results[[1]]
 ## $species$family$scientificNameAuthorship
 ## [1] ""
 ## 
+## $species$family$scientificName
+## [1] "Lamiaceae"
+## 
 ## 
 ## $species$commonNames
 ## $species$commonNames[[1]]
-## [1] "French lavender"
+## [1] "Lavender"
 ## 
 ## $species$commonNames[[2]]
-## [1] "Spanish Lavender"
+## [1] "English lavender"
+## 
+## $species$commonNames[[3]]
+## [1] "Common lavender"
+## 
+## 
+## $species$scientificName
+## [1] "Lavandula angustifolia Mill."
+## 
+## 
+## $gbif
+## $gbif$id
+## [1] "2927305"
 ```
 
 Here we have information on the Latin name, authors, and at the end, a list of the common names.
 
 ### Multiple images
 
-You can get a better identification if you provide more than one image of the plant, and of multiple organs of the plant. The organs that PlantNet considers are: leaf, flower, fruit, bark. You can also take images classed as habit (the overall form of the plant), or other, but you can only have an image labelled as one of these if you also have an image labelled as one of the primary organs (i.e. leaf, flower, fruit, bark).
+You can get a better identification if you provide more than one image of the plant, and of multiple organs of the plant. The organs that PlantNet considers are: leaf, flower, fruit, bark. You can also take images classed as habit (the overall form of the plant), or other, but you can only have an image labeled as one of these if you also have an image labeled as one of the primary organs (i.e. leaf, flower, fruit, bark).
 
 In this example we are going to use three images of Quercus robur from the Encyclopedia of Life.
 
