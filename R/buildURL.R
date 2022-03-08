@@ -11,11 +11,14 @@
 #' but you can only have an image labelled as one of these if you also have
 #' an image labelled as one of the primay organs (i.e. leaf, flower, fruit, bark).
 #' @param lang can be one of 'en' (English), 'fr' (French), 'de' (German)
+#' @param no_reject logical, can be one of `TRUE` or `FALSE` (default), if `TRUE` 
+#' no results' are disabled in case of reject class match
 #' @return The URL required, as a character of length 1
 #' @importFrom utils URLencode
 #' @export
 
-buildURL <- function(key, imageURL, organs = 'leaf', lang = 'en'){
+buildURL <- function(key, imageURL, organs = 'leaf', 
+                     lang = 'en', no_reject = FALSE){
 
   if(length(imageURL) != length(organs)){
     stop('imageURL and organs must be the same length')
@@ -36,13 +39,17 @@ buildURL <- function(key, imageURL, organs = 'leaf', lang = 'en'){
   if(!lang %in% c('en', 'fr', 'de')){
     stop("lang must be one of 'en', 'fr', 'de'")
   }
-
+  
+  if(!no_reject %in% c(TRUE, FALSE))
+    stop("no_reject must be one of TRUE or FALSE (default)")
+  
   URLencoded <- sapply(imageURL, FUN = URLencode, reserved = TRUE, repeated = TRUE)
 
   paste0("https://my-api.plantnet.org/v1/identify/all?",
          "images=", paste(URLencoded, collapse = "&images="),
          "&organs=", paste(organs, collapse = "&organs="),
          "&lang=", lang,
-         "&api-key=", key)
+         "&api-key=", key,
+         "%no-reject=", no_reject)
 
 }
