@@ -21,7 +21,7 @@ test_that("test warnings and errors", {
                         imageURL = imageURL,
                         organs = 'head',
                         lang = lang),
-               "The only allowed values of organs are 'flower','leaf','fruit','bark','habit','other'")
+               "The only allowed values of organs are 'auto', 'flower','leaf','fruit','bark','habit','other'")
   expect_error(buildURL(key = key,
                         imageURL = imageURL,
                         organs = c('flower', 'flower'),
@@ -31,7 +31,7 @@ test_that("test warnings and errors", {
                         imageURL = imageURL,
                         organs = c('habit'),
                         lang = lang),
-               "At leaset one image must be tagged as 'flower','leaf','fruit','bark'")
+               "At leaset one image must be tagged as 'auto', 'flower','leaf','fruit','bark'")
   expect_error(buildURL(key = key,
                         imageURL = c(imageURL, imageURL),
                         organs = organs,
@@ -46,7 +46,7 @@ test_that("test built URL is as expected", {
                      imageURL = c(imageURL, imageURL),
                      organs = c(organs, organs),
                      lang = lang)
-  expected <- "https://my-api.plantnet.org/v1/identify/all?images=IMAGEURL&images=IMAGEURL&organs=flower&organs=flower&lang=en&api-key=MYKEY"
+  expected <- "https://my-api.plantnet.org/v2/identify/all?images=IMAGEURL&images=IMAGEURL&organs=flower&organs=flower&no-reject=false&lang=en&api-key=MYKEY"
   expect_equal(tested, expected)
 
 })

@@ -1,15 +1,15 @@
 Package: plantnet
 Type: Package
 Title: Automated Plant Identification with PlantNet
-Version: 0.1.0
+Version: 1.0.0
 Date: 2019-07-25
-Author: Tom August
+Author: Tom August, Nadja Pernat
 Maintainer: Tom August <tomaug@ceh.ac.uk>
 Description: Using the PlantNet API (https://my.plantnet.org/) this package will assign a plant species name to images.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.2
 Imports: httr
 Suggests: 
     testthat,
