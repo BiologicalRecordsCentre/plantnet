@@ -4,8 +4,14 @@
 \alias{identify}
 \title{Identify plants}
 \usage{
-identify(key, imageURL, simplify = TRUE, organs = rep("leaf",
-  length(imageURL)), lang = "en")
+identify(
+  key,
+  imageURL,
+  simplify = TRUE,
+  organs = rep("auto", length(imageURL)),
+  lang = "en",
+  no_reject = "false"
+)
 }
 \arguments{
 \item{key}{character, your API key (get from https://my.plantnet.org/)}
@@ -21,16 +27,19 @@ error.}
 data.frame}
 
 \item{organs}{character, the organ in the image. Must be one of,
-leaf, flower, fruit, or bark. Must be the same length as `imageURL`.
+auto, leaf, flower, fruit, or bark. Must be the same length as `imageURL`.
 You can also use the tags habit (the overall form of the plant), or other,
 but you can only have an image labelled as one of these if you also have
-an image labelled as one of the primay organs (i.e. leaf, flower, fruit, bark).}
+an image labelled as one of the primary organs (i.e. auto, leaf, flower, fruit, bark).}
 
 \item{lang}{can be one of 'en' (English), 'fr' (French), 'de' (German)}
+
+\item{no_reject}{character, can be one of 'true' or 'false' (default), 
+if 'true' 'no results' are disabled in case of reject class match}
 }
 \value{
 If `simplify` is set to `FALSE` then a list is returned. The
-structure of this list can be explored using hte tool at
+structure of this list can be explored using the tool at
 https://my-api.plantnet.org. If `simplify` is set to `TRUE` (default)
 then a data.frame is with three columns for the score, latin name,
 and common name. There are as many rows as there are species predictions
