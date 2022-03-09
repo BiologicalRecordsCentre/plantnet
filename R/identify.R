@@ -17,8 +17,8 @@
 #' but you can only have an image labelled as one of these if you also have
 #' an image labelled as one of the primary organs (i.e. leaf, flower, fruit, bark).
 #' @param lang can be one of 'en' (English), 'fr' (French), 'de' (German)
-#' @param no_reject logical, can be one of `TRUE` or `FALSE` (default), if `TRUE` 
-#' no results' are disabled in case of reject class match
+#' @param no_reject character, can be one of 'true' or 'false' (default), 
+#' if 'true' 'no results' are disabled in case of reject class match
 #' @details The function uses the PlantNet API. To use this service you need
 #' to have registered an account and generated an API key. All this can be
 #' done here: https://my.plantnet.org/.
@@ -63,10 +63,12 @@
 
 identify <- function(key, imageURL, simplify = TRUE,
                      organs = rep('leaf', length(imageURL)), 
-                     lang = 'en', no_reject = FALSE){
+                     lang = 'en', no_reject = 'false'){
 
   if(!is.character(key)) stop('key should be a character')
   if(!is.character(imageURL)) stop('image should be a character')
+  if(!is.character(no_reject)) stop('no_reject should be a character')
+  
 
   URL <- buildURL(key = key, imageURL = imageURL, organs = organs, 
                   lang = lang, no_reject = no_reject)

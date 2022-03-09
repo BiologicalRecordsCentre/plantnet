@@ -9,16 +9,16 @@
 #' leaf, flower, fruit, or bark. Currently this does not effect the result.
 #' You can also use the tags habit (the overall form of the plant), or other,
 #' but you can only have an image labelled as one of these if you also have
-#' an image labelled as one of the primay organs (i.e. leaf, flower, fruit, bark).
+#' an image labelled as one of the primary organs (i.e. leaf, flower, fruit, bark).
 #' @param lang can be one of 'en' (English), 'fr' (French), 'de' (German)
-#' @param no_reject logical, can be one of `TRUE` or `FALSE` (default), if `TRUE` 
-#' no results' are disabled in case of reject class match
+#' @param no_reject character, can be one of 'true' or 'false' (default), 
+#' if 'true' 'no results' are disabled in case of reject class match
 #' @return The URL required, as a character of length 1
 #' @importFrom utils URLencode
 #' @export
 
 buildURL <- function(key, imageURL, organs = 'leaf', 
-                     lang = 'en', no_reject = FALSE){
+                     lang = 'en', no_reject = 'false'){
 
   if(length(imageURL) != length(organs)){
     stop('imageURL and organs must be the same length')
@@ -40,8 +40,8 @@ buildURL <- function(key, imageURL, organs = 'leaf',
     stop("lang must be one of 'en', 'fr', 'de'")
   }
   
-  if(!no_reject %in% c(TRUE, FALSE))
-    stop("no_reject must be one of TRUE or FALSE (default)")
+  if(!no_reject %in% c('true','false'))
+    stop("no_reject must be one of 'true' or 'false'(default)")
   
   URLencoded <- sapply(imageURL, FUN = URLencode, reserved = TRUE, repeated = TRUE)
 
@@ -50,6 +50,8 @@ buildURL <- function(key, imageURL, organs = 'leaf',
          "&organs=", paste(organs, collapse = "&organs="),
          "&lang=", lang,
          "&api-key=", key,
-         "%no-reject=", no_reject)
+         "&no-reject=", ifelse(no_reject,
+                               yes='true',
+                               no='false'))
 
 }
