@@ -50,6 +50,8 @@ buildURL <- function(key, imageURL, organs = 'leaf',
          "&organs=", paste(organs, collapse = "&organs="),
          "&lang=", lang,
          "&api-key=", key,
-         "%no-reject=", no_reject)
+         "%no-reject=", ifelse(no_reject,
+                               yes = 'true',
+                               no = 'false'))
 
 }
