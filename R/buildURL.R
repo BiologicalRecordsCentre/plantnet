@@ -45,13 +45,15 @@ buildURL <- function(key, imageURL, organs = 'leaf',
   
   URLencoded <- sapply(imageURL, FUN = URLencode, reserved = TRUE, repeated = TRUE)
 
-  paste0("https://my-api.plantnet.org/v1/identify/all?",
-         "images=", paste(URLencoded, collapse = "&images="),
-         "&organs=", paste(organs, collapse = "&organs="),
-         "&lang=", lang,
-         "&api-key=", key,
-         "%no-reject=", ifelse(no_reject,
-                               yes = 'true',
-                               no = 'false'))
+  url_string <- paste0("https://my-api.plantnet.org/v1/identify/all?",
+                       "images=", paste(URLencoded, collapse = "&images="),
+                       "&organs=", paste(organs, collapse = "&organs="),
+                       "%no-reject=", ifelse(no_reject,
+                                             yes = 'true',
+                                             no = 'false'),
+                       "&lang=", lang,
+                       "&api-key=", key)
 
+  print(url_string)
+  return(url_string)
 }
