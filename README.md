@@ -7,7 +7,7 @@
 # PlantNet
 
 ### Developed by Tom August
-last built 2019-07-23
+last built 09/03/2022
 
 The R-package interfaces with the PlantNet image classification API. This API is designed to receive images and return species classifications. You can find out more about the PlantNet project here: https://plantnet.org. To use the API you need to have registered an account and generated an API key. All this can be done here: https://my.plantnet.org/.
 
